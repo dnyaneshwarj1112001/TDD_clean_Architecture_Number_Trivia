@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:tdd_clean_archetecture/core/error/exeptions.dart'; // Make sure to import your Exception classes
 import 'package:tdd_clean_archetecture/core/error/failuer.dart';
 import 'package:tdd_clean_archetecture/core/platform/network_info.dart';
 import 'package:tdd_clean_archetecture/feature/product_trivia/data/datasources/number_trivia_loacal_dataSource.dart';
@@ -18,12 +19,39 @@ class NumberTriviaRepositoryImpl implements Numbertriviarepository {
   });
 
   @override
-  Future<Either<Failuere, NumberTrivia>> getConcritNumberTrivia(int? number) {
-    return null;
+  Future<Either<Failuere, NumberTrivia>> getConcritNumberTrivia(
+    int? number,
+  ) async {
+    networkinfo.isConnected;
+    try {
+      final remoteTrivia = await remotedatasource.getConcritNumberTrivia(
+        number,
+      );
+      loacalDatasource.cacheNumberTrivia(remoteTrivia);
+
+      return right(remoteTrivia);
+    } on ServerExeption {
+      return Left(ServerFailuer());
+    }
   }
 
   @override
-  Future<Either<Failuere, NumberTrivia>> getRandomnumberTrivia() {
-    return null;
+  Future<Either<Failuere, NumberTrivia>> getRandomnumberTrivia() async {
+    if (await networkinfo.isConnected) {
+      try {
+        final remotetrivia = await remotedatasource.getRandomnumberTrivia();
+        await loacalDatasource.cacheNumberTrivia(remotetrivia);
+        return Right(remotetrivia);
+      } on ServerExeption {
+        return left(ServerFailuer());
+      }
+    } else {
+      try {
+        final localTrivia = await loacalDatasource.getLastNumberTrivia();
+        return Right(localTrivia);
+      } on CachExeption {
+        return Left(CachFailuer());
+      }
+    }
   }
 }
