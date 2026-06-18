@@ -20,7 +20,7 @@ import 'number_trivia_repository_impl_test.mocks.dart';
   NetworkInfo,
 ])
 void main() {
-  // object creation and dependancy injection
+  // inicialization
   late NumberTriviaRepositoryImpl repository;
   late MockNumberTriviaRemoteDatasource mockRemoteDataSource;
   late MockNumberTriviaLoacalDatasource mockLocaleDataSource;
@@ -57,10 +57,12 @@ void main() {
             mockRemoteDataSource.getConcritNumberTrivia(any),
           ).thenAnswer((_) async => tNumberTriviamodel);
           // act
-          final resutl = await repository.getConcritNumberTrivia(tNumber);
+          final result = await repository.getConcritNumberTrivia(
+            tNumber,
+          ); // for witch method actually ypu wanted to test
           // assert
           verify(mockRemoteDataSource.getConcritNumberTrivia(tNumber));
-          expect(resutl, equals(right(tnumberTrivia)));
+          expect(result, equals(right(tnumberTrivia)));
         },
       );
 
@@ -87,11 +89,11 @@ void main() {
             mockRemoteDataSource.getConcritNumberTrivia(any),
           ).thenThrow(ServerExeption());
           // act
-          final resutl = await repository.getConcritNumberTrivia(tNumber);
+          final result = await repository.getConcritNumberTrivia(tNumber);
           // assert
           verify(mockRemoteDataSource.getConcritNumberTrivia(tNumber));
           verifyZeroInteractions(mockLocaleDataSource);
-          expect(resutl, equals(Left(ServerFailuer())));
+          expect(result, equals(Left(ServerFailuer())));
         },
       );
     });
