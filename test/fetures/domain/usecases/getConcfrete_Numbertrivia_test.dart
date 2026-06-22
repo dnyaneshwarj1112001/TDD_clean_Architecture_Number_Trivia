@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tdd_clean_archetecture/core/error/failuer.dart';
 import 'package:tdd_clean_archetecture/feature/product_trivia/domain/entities/number_trivia.dart';
@@ -7,10 +8,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:tdd_clean_archetecture/feature/product_trivia/domain/repositories/numberTriviarepository.dart';
 import 'package:tdd_clean_archetecture/feature/product_trivia/domain/usecases/GetConcrfeteNumberTrivia.dart';
 
+@GenerateMocks([MockNumberTriviaRepository])
 class MockNumberTriviaRepository extends Mock
     implements Numbertriviarepository {
   @override
-  Future<Either<Failuere, NumberTrivia>> getConcritNumbertrivia(int? number) {
+  Future<Either<Failuere, NumberTrivia>> getConcritNumberTrivia(int? number) {
     return super.noSuchMethod(
       Invocation.method(#getConcritNumbertrivia, [number]),
       // Yahan Right ke sath <Failuere, NumberTrivia> explicitly define kiya hai
@@ -48,7 +50,7 @@ void main() {
     // arrange
 
     when(
-      mockNumberTriviaRepository.getConcritNumbertrivia(any),
+      mockNumberTriviaRepository.getConcritNumberTrivia(any),
     ).thenAnswer((_) async => Right(tNumberTrivia));
 
     // act
@@ -56,7 +58,7 @@ void main() {
 
     // assert
     expect(result, Right(tNumberTrivia));
-    verify(mockNumberTriviaRepository.getConcritNumbertrivia(tNumber));
+    verify(mockNumberTriviaRepository.getConcritNumberTrivia(tNumber));
     verifyNoMoreInteractions(mockNumberTriviaRepository);
   });
 }
