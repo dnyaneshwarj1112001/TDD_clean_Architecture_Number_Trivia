@@ -6,7 +6,7 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:tdd_clean_archetecture/core/platform/network_info.dart' as _i6;
+import 'package:tdd_clean_archetecture/core/Network/network_info.dart' as _i6;
 import 'package:tdd_clean_archetecture/feature/product_trivia/data/datasources/number_trivia_loacal_dataSource.dart'
     as _i5;
 import 'package:tdd_clean_archetecture/feature/product_trivia/data/datasources/number_trivia_remote_datasource.dart'

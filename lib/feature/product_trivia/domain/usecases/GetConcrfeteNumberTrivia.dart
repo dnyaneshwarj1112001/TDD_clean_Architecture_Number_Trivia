@@ -2,11 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:tdd_clean_archetecture/core/error/failuer.dart';
 import 'package:tdd_clean_archetecture/core/usecases/usecase.dart';
-import 'package:tdd_clean_archetecture/feature/product_trivia/domain/repositories/numberTriviarepository.dart';
+import 'package:tdd_clean_archetecture/feature/product_trivia/domain/repositories/NumberTriviaRepository.dart';
 import 'package:tdd_clean_archetecture/feature/product_trivia/domain/entities/number_trivia.dart';
 
 class GetConcritNumberTrivia implements Usecase<NumberTrivia, Params> {
-  final Numbertriviarepository repository;
+  final NumberTriviaRepository repository;
   GetConcritNumberTrivia(this.repository);
 
   @override

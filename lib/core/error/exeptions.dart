@@ -1,3 +1,3 @@
-class ServerExeption implements Exception {}
+class ServerException implements Exception {}
 
 class CachExeption implements Exception {}

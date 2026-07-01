@@ -10,8 +10,8 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:tdd_clean_archetecture/core/error/failuer.dart' as _i5;
 import 'package:tdd_clean_archetecture/feature/product_trivia/domain/entities/number_trivia.dart'
     as _i6;
-
-import 'getConcfrete_Numbertrivia_test.dart' as _i3;
+import 'package:tdd_clean_archetecture/feature/product_trivia/domain/repositories/NumberTriviaRepository.dart'
+    as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -33,14 +33,29 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
     : super(parent, parentInvocation);
 }
 
-/// A class which mocks [MockNumberTriviaRepository].
+/// A class which mocks [NumberTriviaRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMockNumberTriviaRepository extends _i1.Mock
-    implements _i3.MockNumberTriviaRepository {
-  MockMockNumberTriviaRepository() {
+class MockNumberTriviaRepository extends _i1.Mock
+    implements _i3.NumberTriviaRepository {
+  MockNumberTriviaRepository() {
     _i1.throwOnMissingStub(this);
   }
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failuere, _i6.NumberTrivia>>
+  getRandomnumberTrivia() =>
+      (super.noSuchMethod(
+            Invocation.method(#getRandomnumberTrivia, []),
+            returnValue:
+                _i4.Future<_i2.Either<_i5.Failuere, _i6.NumberTrivia>>.value(
+                  _FakeEither_0<_i5.Failuere, _i6.NumberTrivia>(
+                    this,
+                    Invocation.method(#getRandomnumberTrivia, []),
+                  ),
+                ),
+          )
+          as _i4.Future<_i2.Either<_i5.Failuere, _i6.NumberTrivia>>);
 
   @override
   _i4.Future<_i2.Either<_i5.Failuere, _i6.NumberTrivia>> getConcritNumberTrivia(
@@ -53,21 +68,6 @@ class MockMockNumberTriviaRepository extends _i1.Mock
                   _FakeEither_0<_i5.Failuere, _i6.NumberTrivia>(
                     this,
                     Invocation.method(#getConcritNumberTrivia, [number]),
-                  ),
-                ),
-          )
-          as _i4.Future<_i2.Either<_i5.Failuere, _i6.NumberTrivia>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.Failuere, _i6.NumberTrivia>>
-  getRandomnumberTrivia() =>
-      (super.noSuchMethod(
-            Invocation.method(#getRandomnumberTrivia, []),
-            returnValue:
-                _i4.Future<_i2.Either<_i5.Failuere, _i6.NumberTrivia>>.value(
-                  _FakeEither_0<_i5.Failuere, _i6.NumberTrivia>(
-                    this,
-                    Invocation.method(#getRandomnumberTrivia, []),
                   ),
                 ),
           )

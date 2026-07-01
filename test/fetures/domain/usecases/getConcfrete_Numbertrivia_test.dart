@@ -5,35 +5,12 @@ import 'package:tdd_clean_archetecture/core/error/failuer.dart';
 import 'package:tdd_clean_archetecture/feature/product_trivia/domain/entities/number_trivia.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tdd_clean_archetecture/feature/product_trivia/domain/repositories/numberTriviarepository.dart';
+import 'package:tdd_clean_archetecture/feature/product_trivia/domain/repositories/NumberTriviaRepository.dart';
+import 'package:tdd_clean_archetecture/feature/product_trivia/domain/repositories/NumberTriviaRepository.dart';
 import 'package:tdd_clean_archetecture/feature/product_trivia/domain/usecases/GetConcrfeteNumberTrivia.dart';
+import 'getConcfrete_Numbertrivia_test.mocks.dart';
 
-@GenerateMocks([MockNumberTriviaRepository])
-class MockNumberTriviaRepository extends Mock
-    implements Numbertriviarepository {
-  @override
-  Future<Either<Failuere, NumberTrivia>> getConcritNumberTrivia(int? number) {
-    return super.noSuchMethod(
-      Invocation.method(#getConcritNumbertrivia, [number]),
-      // Yahan Right ke sath <Failuere, NumberTrivia> explicitly define kiya hai
-      returnValue: Future.value(
-        Right<Failuere, NumberTrivia>(NumberTrivia(number: 1, text: '')),
-      ),
-    );
-  }
-
-  @override
-  Future<Either<Failuere, NumberTrivia>> getRandomnumberTrivia() {
-    return super.noSuchMethod(
-      Invocation.method(#getRandomnumberTrivia, []),
-      // Yahan Right ke sath <Failuere, NumberTrivia> explicitly define kiya hai
-      returnValue: Future.value(
-        Right<Failuere, NumberTrivia>(NumberTrivia(number: 1, text: '')),
-      ),
-    );
-  }
-}
-
+@GenerateMocks([NumberTriviaRepository])
 void main() {
   late GetConcritNumberTrivia usecase;
   late MockNumberTriviaRepository mockNumberTriviaRepository;

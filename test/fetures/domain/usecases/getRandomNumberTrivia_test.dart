@@ -4,19 +4,19 @@ import 'package:mockito/mockito.dart';
 import 'package:tdd_clean_archetecture/core/error/failuer.dart';
 import 'package:tdd_clean_archetecture/core/usecases/usecase.dart';
 import 'package:tdd_clean_archetecture/feature/product_trivia/domain/entities/number_trivia.dart';
-import 'package:tdd_clean_archetecture/feature/product_trivia/domain/repositories/Numbertriviarepository.dart';
+import 'package:tdd_clean_archetecture/feature/product_trivia/domain/repositories/NumberTriviaRepository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tdd_clean_archetecture/feature/product_trivia/domain/usecases/get_Random_number_Trivia.dart';
 
 import 'getRandomNumberTrivia_test.mocks.dart';
 
-@GenerateMocks([Numbertriviarepository])
+@GenerateMocks([NumberTriviaRepository])
 void main() {
   late GetRandomNumberTrivia usecase;
-  late MockNumbertriviarepository mockNumberTriviaRepository;
+  late MockNumberTriviaRepository mockNumberTriviaRepository;
 
   setUp(() {
-    mockNumberTriviaRepository = MockNumbertriviarepository();
+    mockNumberTriviaRepository = MockNumberTriviaRepository();
     usecase = GetRandomNumberTrivia(mockNumberTriviaRepository);
   });
 

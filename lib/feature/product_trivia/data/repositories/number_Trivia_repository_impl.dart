@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:tdd_clean_archetecture/core/error/exeptions.dart'; // Make sure to import your Exception classes
 import 'package:tdd_clean_archetecture/core/error/failuer.dart';
-import 'package:tdd_clean_archetecture/core/platform/network_info.dart';
+import 'package:tdd_clean_archetecture/core/Network/network_info.dart';
 import 'package:tdd_clean_archetecture/feature/product_trivia/data/datasources/number_trivia_loacal_dataSource.dart';
 import 'package:tdd_clean_archetecture/feature/product_trivia/data/datasources/number_trivia_remote_datasource.dart';
 import 'package:tdd_clean_archetecture/feature/product_trivia/data/models/number_trivia_model.dart';
 import 'package:tdd_clean_archetecture/feature/product_trivia/domain/entities/number_trivia.dart';
-import 'package:tdd_clean_archetecture/feature/product_trivia/domain/repositories/numberTriviarepository.dart';
+import 'package:tdd_clean_archetecture/feature/product_trivia/domain/repositories/NumberTriviaRepository.dart';
 
-class NumberTriviaRepositoryImpl implements Numbertriviarepository {
+class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   final NumberTriviaRemoteDatasource remotedatasource;
   final NumberTriviaLoacalDatasource loacalDatasource;
   final NetworkInfo networkinfo;
@@ -31,7 +31,7 @@ class NumberTriviaRepositoryImpl implements Numbertriviarepository {
   @override
   Future<Either<Failuere, NumberTrivia>> getRandomnumberTrivia() async {
     return await _getTrivia(() {
-      return loacalDatasource.getLastNumberTrivia();
+      return remotedatasource.getRandomnumberTrivia();
     });
   }
 
@@ -44,7 +44,7 @@ class NumberTriviaRepositoryImpl implements Numbertriviarepository {
         loacalDatasource.cacheNumberTrivia(remoteTrivia as NumberTriviaModel);
 
         return right(remoteTrivia);
-      } on ServerExeption {
+      } on ServerException {
         return Left(ServerFailuer());
       }
     } else {
